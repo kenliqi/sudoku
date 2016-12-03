@@ -1,17 +1,12 @@
 package com.iqgames.sudoku.image;
 
 import com.iqgames.sudoku.common.Loggable;
+import com.iqgames.sudoku.image.color.RGBAValues;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageTypeSpecifier;
-import javax.imageio.metadata.IIOMetadata;
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 import java.util.List;
 
@@ -22,7 +17,7 @@ public class ImageReader implements Loggable {
 
     private String file;
     private BufferedImage image;
-    public static final Double WHITE_THRESHOLD = 0.5;
+    public static final Double BLACK_THRESHOLD = 0.9;
 
     public ImageReader(String file) {
         this.file = file;
@@ -66,23 +61,25 @@ public class ImageReader implements Loggable {
 
     public BufferedImage removeColor() {
         getLog().info("Starts to remove color");
-//        Set<Pair<Integer, Integer>> blacks = new HashSet<>();
+        BufferedImage blackWhite = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
 //        for (int x = 0; x < image.getWidth(); x++)
 //            for (int y = 0; y < image.getHeight(); y++) {
 //                int avg = getAvg(x, y);
 //                int cur = image.getRGB(x, y) & 0x00ffffff;
-//                if (cur < WHITE_THRESHOLD * avg) image.setRGB(x,y, RGBAValues.WHITE.getRGB());
-//                else image.setRGB(x,y, RGBAValues.BLACK.getRGB());
+//                if (cur < BLACK_THRESHOLD * avg || cur==0) blackWhite.setRGB(x,y, RGBAValues.BLACK.getRGB());
+//                else blackWhite.setRGB(x,y, RGBAValues.WHITE.getRGB());
 //            }
 //        for (int x = 0; x < image.getWidth(); x++)
 //            for (int y = 0; y < image.getHeight(); y++) {
 //                if(blacks.contains(Pair.of(x,y))) image.setRGB(x,y, RGBAValues.BLACK.getRGB());
 //                else image.setRGB(x,y, RGBAValues.WHITE.getRGB());
 //            }
-        BufferedImage blackWhite = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
-        Graphics2D graphics2D = blackWhite.createGraphics();
-        graphics2D.drawImage(image, 0,0,null);
-        graphics2D.dispose();
+
+
+//        Graphics2D graphics2D = blackWhite.createGraphics();
+//        graphics2D.drawImage(image, 0,0,null);
+//        graphics2D.dispose();
+        blackWhite = AdaptiveImageBin.binarize(image);
         getLog().info("Completes removing the color");
         return blackWhite;
     }

@@ -1,4 +1,4 @@
-package com.iqgames.sudoku.image;
+package com.iqgames.sudoku.image.color;
 
 /**
  * Created by qili on 29/11/2016.

@@ -4,7 +4,7 @@ import com.iqgames.sudoku.common.Loggable;
 import com.iqgames.sudoku.data.Square;
 import com.iqgames.sudoku.image.ImageBlob;
 import com.iqgames.sudoku.image.ImageReader;
-import com.iqgames.sudoku.image.RGBAValues;
+import com.iqgames.sudoku.image.color.RGBAValues;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
 
@@ -16,9 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by qili on 29/11/2016.
@@ -27,7 +25,7 @@ public class ImageReaderTest implements Loggable {
 
     @Test
     public void testAColor() throws IOException {
-        ImageReader image = new ImageReader("sudoku-1.jpg");
+        ImageReader image = new ImageReader("sudoku-2.jpg");
         System.out.println(image.getAValue());
         System.out.println(image.toString());
 
@@ -54,7 +52,7 @@ public class ImageReaderTest implements Loggable {
         getLog().info("The max blob ratio " + res.getRight());
 
         Square square = res.getLeft().getBoundary();
-        square.draw(newImage, new RGBAValues(255, 0, 0));
+        square.draw(newImage, new RGBAValues(0, 255, 0));
 
 
         wrt.write(newImage);

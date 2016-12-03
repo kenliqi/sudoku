@@ -3,6 +3,9 @@ package com.iqgames.sudoku.image;
 import com.iqgames.sudoku.common.Loggable;
 import com.iqgames.sudoku.data.Position;
 import com.iqgames.sudoku.data.Square;
+import com.iqgames.sudoku.image.color.ColorDistance;
+import com.iqgames.sudoku.image.color.RGBAValues;
+import com.iqgames.sudoku.image.color.YUVValues;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.awt.image.BufferedImage;
@@ -74,8 +77,10 @@ public class ImageBlob implements Loggable {
         return res;
     }
 
+    public final Double BLACK_THRESHOLD = 0.01;
     private boolean isBlack(Position pos) {
         RGBAValues rgb = new RGBAValues(image.getRGB(pos.getX(), pos.getY()));
+//        return ColorDistance.distance(new YUVValues(rgb), new YUVValues(RGBAValues.BLACK)) <= BLACK_THRESHOLD;
         return rgb.equals(RGBAValues.BLACK);
     }
 

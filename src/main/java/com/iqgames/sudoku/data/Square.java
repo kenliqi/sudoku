@@ -1,6 +1,6 @@
 package com.iqgames.sudoku.data;
 
-import com.iqgames.sudoku.image.RGBAValues;
+import com.iqgames.sudoku.image.color.RGBAValues;
 
 import java.awt.image.BufferedImage;
 
