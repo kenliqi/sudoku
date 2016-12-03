@@ -3,7 +3,7 @@ package com.iqgames.sudoku.algo;
 import com.iqgames.sudoku.common.Loggable;
 import com.iqgames.sudoku.data.PositionWithOptions;
 import com.iqgames.sudoku.data.SudokuBoard;
-import com.iqgames.sudoku.input.OneLineReader;
+import com.iqgames.sudoku.input.SudokuProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
  * Created by qili on 18/11/2016.
  */
 public class SudokuSolverTest implements Loggable {
-    private OneLineReader reader = new OneLineReader();
+    private SudokuProvider reader = new SudokuProvider();
     private SudokuSolver solver = new DefaultSudokuSolver();
     private SudokuBoard getOneSudoku() {
         Optional<SudokuBoard> opt = reader.parseLine("......41.9..2.....3...5.....48..7..........62.1.......6..5....3.7....8......9....");
